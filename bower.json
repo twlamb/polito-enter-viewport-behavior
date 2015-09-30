@@ -1,0 +1,17 @@
+{
+  "name": "polito-just-in-time-behavior",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PolitoElements/polito-just-in-time-behavior",
+  "authors": [
+    "mbr4nt <mateus.brant@gmail.com>"
+  ],
+  "main": "polito-just-in-time-behavior.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
