@@ -4,6 +4,9 @@ Behavior to fire an event when the object first enters viewport.
 
 Useful to delay processing or loading of resources until element comes visible.
 
+```
+bower install polito-just-in-time-behavior
+```
 ```html
 <dom-module id="polito-hello">
     <style>
