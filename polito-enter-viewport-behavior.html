@@ -22,12 +22,12 @@
             }
             if (!this.visible) {
                 this.visible = true;
-                this.debounce("enter-viewport", this.enterViewport, 100);
+                this.enterViewport();
             }
         },
         _exit: function() {
             if (this.visible) {
-                this.debounce("exit-viewport", this.exitViewport, 100);
+                this.exitViewport();
                 this.visible = false;
             }
         },
