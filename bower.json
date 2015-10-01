@@ -5,6 +5,13 @@
   "authors": [
     "mbr4nt <mateus.brant@gmail.com>"
   ],
+  "keywords": [
+    "polymer",
+    "webcomponents",
+    "scroll",
+    "viewport",
+    "enter"
+  ],
   "main": "polito-just-in-time-behavior.html",
   "license": "MIT",
   "ignore": [
