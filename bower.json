@@ -1,7 +1,7 @@
 {
-  "name": "polito-just-in-time-behavior",
+  "name": "polito-enter-viewport-behavior",
   "version": "1.0.0",
-  "homepage": "https://github.com/PolitoElements/polito-just-in-time-behavior",
+  "homepage": "https://github.com/PolitoElements/polito-enter-viewport-behavior",
   "authors": [
     "mbr4nt <mateus.brant@gmail.com>"
   ],
@@ -12,7 +12,7 @@
     "viewport",
     "enter"
   ],
-  "main": "polito-just-in-time-behavior.html",
+  "main": "polito-enter-viewport-behavior.html",
   "license": "MIT",
   "ignore": [
     "**/.*",

@@ -16,9 +16,15 @@
 <script>
     Polymer({
         is: "polito-hello",
-        behaviors: [Polito.JustInTimeBehavior],
+        behaviors: [Polito.EnterViewportBehavior],
         prepareToRender: function(){
+            console.log("Hello once " + this.name + "!!");
+        },
+        enterViewport: function () {
             console.log("Hello " + this.name + "!!");
+        },
+        exitViewport: function () {
+            console.log("Bye " + this.name + "!!");
         }
     });
 </script>

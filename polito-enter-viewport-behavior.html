@@ -1,0 +1,73 @@
+<script>
+    if (typeof(Polito) != "object") {
+        var Polito = {};
+    }
+    Polito.EnterViewportBehavior = {
+
+        //public stuff
+        enterViewport: function() {},
+        exitViewport: function() {},
+        prepareToRender: function() {},
+        properties: {
+            visible: Boolean,
+            value: false
+        },
+        // end public stuff
+
+        _notifiedOnce: false,
+        _enter: function() {
+            if (!this._notifiedOnce) {
+                this._notifiedOnce = true;
+                this.prepareToRender();
+            }
+            if (!this.visible) {
+                this.visible = true;
+                this.debounce("enter-viewport", this.enterViewport, 100);
+            }
+        },
+        _exit: function() {
+            if (this.visible) {
+                this.debounce("exit-viewport", this.exitViewport, 100);
+                this.visible = false;
+            }
+        },
+        attached: function() {
+            this._setupListeners();
+            this._checkVisibility();
+        },
+        _setupListeners: function() {
+            var polito = this;
+            window.addEventListener('scroll', function(e) {
+                polito._checkVisibility.apply(polito);
+            });
+        },
+        _checkVisibility: function() {
+            var el = this;
+
+            var top = el.offsetTop;
+            var left = el.offsetLeft;
+            var width = el.offsetWidth;
+            var height = el.offsetHeight;
+
+            while (el.offsetParent) {
+                el = el.offsetParent;
+                top += el.offsetTop;
+                left += el.offsetLeft;
+            }
+
+            var visible = (
+                top < (window.pageYOffset + window.innerHeight) &&
+                left < (window.pageXOffset + window.innerWidth) &&
+                (top + height) > window.pageYOffset &&
+                (left + width) > window.pageXOffset
+            );
+            if (visible) {
+                this._enter();
+            }
+            else {
+                this._exit();
+            }
+
+        }
+    }
+</script>
