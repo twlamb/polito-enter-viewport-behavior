@@ -9,8 +9,15 @@
         exitViewport: function() {},
         prepareToRender: function() {},
         properties: {
-            visible: Boolean,
-            value: false
+            visible: { 
+                type: Boolean,
+                value: false
+                
+            },
+            padding: {
+                type: Number,
+                value: 0
+            }
         },
         // end public stuff
 
@@ -56,10 +63,10 @@
             }
 
             var visible = (
-                top < (window.pageYOffset + window.innerHeight) &&
-                left < (window.pageXOffset + window.innerWidth) &&
-                (top + height) > window.pageYOffset &&
-                (left + width) > window.pageXOffset
+                top < (window.pageYOffset + window.innerHeight + this.padding) &&
+                left < (window.pageXOffset + window.innerWidth + this.padding) &&
+                (top + height) > (window.pageYOffset - this.padding) &&
+                (left + width) > (window.pageXOffset - this.padding)
             );
             if (visible) {
                 this._enter();
