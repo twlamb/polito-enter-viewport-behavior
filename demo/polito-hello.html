@@ -19,7 +19,7 @@
         is: "polito-hello",
         behaviors: [Polito.EnterViewportBehavior],
         //supply the number of pixels to consider as padding for the viewport. useful to fire the enter event a bit early.
-        padding: 0,
+        viewportPadding: 0,
         prepareToRender: function(){
             console.log("Hello once " + this.name + "!!");
         },
