@@ -10,12 +10,12 @@
         exitViewport: function() {},
         prepareToRender: function() {},
         properties: {
-            visible: { 
+            visibleInViewPort: { 
                 type: Boolean,
                 value: false
                 
             },
-            padding: {
+            viewportPadding: {
                 type: Number,
                 value: 0
             }
@@ -28,15 +28,15 @@
                 this._notifiedOnce = true;
                 this.prepareToRender();
             }
-            if (!this.visible) {
-                this.visible = true;
+            if (!this.visibleInViewPort) {
+                this.visibleInViewPort = true;
                 this.enterViewport();
             }
         },
         _exit: function() {
-            if (this.visible) {
+            if (this.visibleInViewPort) {
+                this.visibleInViewPort = false;
                 this.exitViewport();
-                this.visible = false;
             }
         },
         attached: function() {
