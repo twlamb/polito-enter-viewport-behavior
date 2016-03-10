@@ -5,7 +5,6 @@
     Polito.EnterViewportBehavior = {
 
         //public stuff
-        scrollTarget: window,
         enterViewport: function() {},
         exitViewport: function() {},
         prepareToRender: function() {},
@@ -19,6 +18,12 @@
                 type: Number,
                 value: 0
             }
+        },
+        addScrollTarget: function(target) {
+            var polito = this;
+            target.addEventListener('scroll', function(e) {
+                polito._checkVisibility.apply(polito);
+            });
         },
         // end public stuff
 
@@ -40,14 +45,8 @@
             }
         },
         attached: function() {
-            this._setupListeners();
+            this.addScrollTarget(window);
             this._checkVisibility();
-        },
-        _setupListeners: function() {
-            var polito = this;
-            this.scrollTarget.addEventListener('scroll', function(e) {
-                polito._checkVisibility.apply(polito);
-            });
         },
         _checkVisibility: function() {
             var el = this;
