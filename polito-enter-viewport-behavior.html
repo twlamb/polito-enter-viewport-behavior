@@ -52,7 +52,7 @@
             var el = this;
             var visible = false;
 
-            if(jQuery) {
+            if(typeof(jQuery) !== "undefined") {
                 visible = this._jQueryVisible(jQuery, el);
             }
             else {
