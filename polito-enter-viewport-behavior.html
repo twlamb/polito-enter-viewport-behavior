@@ -19,6 +19,12 @@
                 value: 0
             }
         },
+        addScrollTarget: function(target) {
+            var polito = this;
+            target.addEventListener('scroll', function(e) {
+                polito._checkVisibility.apply(polito);
+            });
+        },
         // end public stuff
 
         _notifiedOnce: false,
@@ -39,42 +45,55 @@
             }
         },
         attached: function() {
-            this._setupListeners();
+            this.addScrollTarget(window);
             this._checkVisibility();
-        },
-        _setupListeners: function() {
-            var polito = this;
-            window.addEventListener('scroll', function(e) {
-                polito._checkVisibility.apply(polito);
-            });
         },
         _checkVisibility: function() {
             var el = this;
+            var visible = false;
 
-            var top = el.offsetTop;
-            var left = el.offsetLeft;
-            var width = el.offsetWidth;
-            var height = el.offsetHeight;
-
-            while (el.offsetParent) {
-                el = el.offsetParent;
-                top += el.offsetTop;
-                left += el.offsetLeft;
+            if(typeof(jQuery) !== "undefined") {
+                visible = this._jQueryVisible(jQuery, el);
             }
+            else {
+                var top = el.offsetTop;
+                var left = el.offsetLeft;
+                var width = el.offsetWidth;
+                var height = el.offsetHeight;
 
-            var visible = (
-                top < (window.pageYOffset + window.innerHeight + this.viewportPadding) &&
-                left < (window.pageXOffset + window.innerWidth + this.viewportPadding) &&
-                (top + height) > (window.pageYOffset - this.viewportPadding) &&
-                (left + width) > (window.pageXOffset - this.viewportPadding)
-            );
+                while (el.offsetParent) {
+                    el = el.offsetParent;
+                    top += el.offsetTop;
+                    left += el.offsetLeft;
+                }
+
+                visible = (
+                    top < (window.pageYOffset + window.innerHeight + this.padding) &&
+                    left < (window.pageXOffset + window.innerWidth + this.padding) &&
+                    (top + height) > (window.pageYOffset - this.padding) &&
+                    (left + width) > (window.pageXOffset - this.padding)
+                );
+            }
+            
             if (visible) {
                 this._enter();
             }
             else {
                 this._exit();
             }
+        },
+        _jQueryVisible: function($, elem) {
+            var $elem = $(elem);
+            var $window = $(window);
 
+            var docViewTop = $window.scrollTop();
+            var docViewBottom = docViewTop + $window.height();
+
+            var elemTop = $elem.offset().top;
+            var elemBottom = elemTop + $elem.height();
+
+            return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
         }
     }
+
 </script>
