@@ -17,6 +17,18 @@
             viewportPadding: {
                 type: Number,
                 value: 0
+            },
+            scrollTargetSelector: {
+                type: String,
+                value: ""
+            }
+        },
+        getDefaultScrollTarget: function( ) {
+            if (this.scrollTargetSelector) {
+                return document.querySelector(this.scrollTargetSelector);
+            }
+            else {
+                return window;
             }
         },
         addScrollTarget: function(target) {
@@ -45,7 +57,7 @@
             }
         },
         attached: function() {
-            this.addScrollTarget(window);
+            this.addScrollTarget(this.getDefaultScrollTarget());
             this._checkVisibility();
         },
         _checkVisibility: function() {
