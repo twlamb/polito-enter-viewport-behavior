@@ -1,14 +1,14 @@
 <dom-module id="polito-hello">
-    <style>
-       :host {
-           height:300px;
-           display: block;
-           background-color: red;
-       }
-    </style>
     <template>
+        <style>
+            :host {
+                height:300px;
+                display: block;
+                background-color: red;
+            }
+        </style>
 
-        <h1>{{name}}</h1>
+        <h1>[[name]]</h1>
 
     </template>
 
@@ -20,6 +20,12 @@
         behaviors: [Polito.EnterViewportBehavior],
         //supply the number of pixels to consider as padding for the viewport. useful to fire the enter event a bit early.
         viewportPadding: 0,
+        properties: {
+            name: {
+                type: String,
+                value: ""
+            }
+        },
         prepareToRender: function(){
             console.log("Hello once " + this.name + "!!");
         },

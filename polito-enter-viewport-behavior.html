@@ -57,8 +57,10 @@
             }
         },
         attached: function() {
-            this.addScrollTarget(this.getDefaultScrollTarget());
-            this._checkVisibility();
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this.addScrollTarget(this.getDefaultScrollTarget());
+                this._checkVisibility();    
+            });
         },
         _checkVisibility: function() {
             var el = this;
